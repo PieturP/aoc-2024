@@ -1,4 +1,4 @@
-import { PuzzleData } from "./PuzzleData.d.ts";
+import { IPuzzleData } from "./IPuzzleData.d.ts";
 
 const INPUT_FILENAME = "./day1/puzzleData.txt";
 const EOL = "\n";
@@ -8,7 +8,7 @@ export function getInputData(): string {
   return Deno.readTextFileSync(INPUT_FILENAME);
 }
 
-export function puzzleData(): PuzzleData {
+export function puzzleData(): IPuzzleData {
   const left = [] as number[];
   const right = [] as number[];
 
