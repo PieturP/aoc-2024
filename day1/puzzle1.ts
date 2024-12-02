@@ -7,9 +7,9 @@ export function puzzle1(): number {
   data.left.sort();
   data.right.sort();
 
-  for (let index = 0; index < data.left.length; index ++) {
+  for (let index = 0; index < data.left.length; index++) {
     out += Math.abs(
-      data.left[index] - data.right[index]
+      data.left[index] - data.right[index],
     );
   }
 

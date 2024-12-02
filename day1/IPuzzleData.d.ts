@@ -1,4 +1,4 @@
 export interface IPuzzleData {
-  left: number[],
-  right: number[]
+  left: number[];
+  right: number[];
 }

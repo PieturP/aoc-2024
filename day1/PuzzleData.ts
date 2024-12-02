@@ -18,11 +18,10 @@ export function puzzleData(): IPuzzleData {
       const split: string[] = line.split(DELIMITER);
       left.push(parseInt(split[0], 10));
       right.push(parseInt(split[1], 10));
-    }
-  )
+    });
 
   return {
     left,
-    right
-  }
+    right,
+  };
 }
