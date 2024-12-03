@@ -1,4 +1,4 @@
-# Adevent of Code '24
+# Advent of Code '24
 
 See [Advent Of Code 2024](https://adventofcode.com/2024)
 
