@@ -1,3 +1,5 @@
-# Advent Of Code 2024
+# Adevent of Code '24
 
-Run `deno task start`
+See [Advent Of Code 2024](https://adventofcode.com/2024)
+
+Simply use `$ deno task start`
