@@ -38,7 +38,7 @@ if (import.meta.main) {
   console.log(`Going to run puzzles for: %cday ${day}`, "color: cyan");
 
   const timeStart = performance.now();
-  console.log("Output for puzzle 1", module1.puzzle1());
+  // console.log("Output for puzzle 1", module1.puzzle1());
   console.log("Output for puzzle 2", module2.puzzle2());
   const timeEnd = performance.now();
   console.log();
