@@ -1,6 +1,4 @@
 import { puzzleData } from "./puzzleData.ts";
-import { count } from "https://deno.land/x/ayonli_jsext@0.9.80/esm/string/index.js";
-import { walkData } from "./puzzle1.ts";
 
 interface PosDir {
   x: number;
@@ -8,7 +6,12 @@ interface PosDir {
   direction: number;
 }
 
-let maxX = 0, maxY = 0;
+function getMaxY(data: string[][]) {
+  return data.length - 1;
+}
+function getMaxX(data: string[][]) {
+  return data[0].length - 1;
+}
 
 const OBSTACLE = "#";
 // deno-fmt-ignore
@@ -25,20 +28,13 @@ const OFFLIMIT = {
   direction: -1,
 };
 
-function initializeData(): string[][] {
-  const data = puzzleData();
-  maxY = data.length - 1;
-  maxX = data[0].length - 1;
-  return data;
-}
-
 function getCurrentPositionAndDirection(
   data: string[][],
 ): PosDir {
   const guard = DIRECTIONS.map((dir) => dir.c);
   let y = 0, x = 0;
-  for (y = 0; y < maxY; y++) {
-    for (x = 0; x < maxX; x++) {
+  for (y = 0; y < getMaxY(data); y++) {
+    for (x = 0; x < getMaxX(data); x++) {
       if (guard.indexOf(data[y][x]) > -1) {
         return {
           x,
@@ -63,10 +59,10 @@ function getNextPosition(current: PosDir, data: string[][]): PosDir {
   const nx = current.x + DIRECTIONS[current.direction].x;
   const ny = current.y + DIRECTIONS[current.direction].y;
 
-  if (ny > maxY || ny < 0) {
+  if (ny > getMaxY(data) || ny < 0) {
     return OFFLIMIT;
   }
-  if (nx > maxX || nx < 0) {
+  if (nx > getMaxX(data) || nx < 0) {
     return OFFLIMIT;
   }
 
@@ -85,9 +81,26 @@ function getNextPosition(current: PosDir, data: string[][]): PosDir {
   };
 }
 
+function puzzle1AsString(): string {
+  const data = puzzleData();
+  let nextPos = getCurrentPositionAndDirection(data);
+
+  function walkData(): string {
+    nextPos = getNextPosition(nextPos, data);
+
+    if (nextPos.direction !== -1) {
+      data[nextPos.y][nextPos.x] = "X";
+      walkData();
+    }
+
+    return data.map((line) => line.join("")).join("\n");
+  }
+  return walkData();
+}
+
 function getPossibleObstructionPositions(): number[][] {
   const out: number[][] = [];
-  const lines = walkData().split("\n");
+  const lines = puzzle1AsString().split("\n");
   lines.forEach((line, y) => {
     line.split("").forEach((v, x) => {
       if (v === "X") {
@@ -99,26 +112,27 @@ function getPossibleObstructionPositions(): number[][] {
 }
 
 export function puzzle2(): number {
-  return 0;
-}
-
-export function __puzzle2(): number {
   const positions = getPossibleObstructionPositions();
   const total = positions.length;
+
   let endlessLoopCount = 0;
-  let str: string;
-  let data;
+  let _str: string;
 
   positions.forEach(([x, y], i) => {
-    console.log(`${i} / ${total}, ${Math.round(i / total * 100)}%`);
-    data = initializeData();
-    let nexPos = getCurrentPositionAndDirection(data);
+    console.log(
+      `Brute forcing output for puzzle 2: ${
+        Math.round(i / total * 100)
+      }%, (${i}/${total})`,
+    );
+
+    const data = puzzleData();
+    let nextPosition = getCurrentPositionAndDirection(data);
 
     function walkData(data: string[][]): string {
-      nexPos = getNextPosition(nexPos, data);
+      nextPosition = getNextPosition(nextPosition, data);
 
-      if (nexPos.direction !== -1) {
-        data[nexPos.y][nexPos.x] = "X";
+      if (nextPosition.direction !== -1) {
+        data[nextPosition.y][nextPosition.x] = "X";
         walkData(data);
       }
 
@@ -128,10 +142,10 @@ export function __puzzle2(): number {
     data[y][x] = "#";
 
     try {
-      str = walkData(data);
-    } catch (exception) {
+      _str = walkData(data);
+    } catch (_ex) {
+      // console.log(_str);
       endlessLoopCount++;
-      console.log({ x, y, loops: true });
     }
   });
 
