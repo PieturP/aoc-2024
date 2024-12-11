@@ -11,5 +11,14 @@
     "@std/collections@1.0.9": {
       "integrity": "4f58104ead08a04a2199374247f07befe50ba01d9cca8cbb23ab9a0419921e71"
     }
+  },
+  "remote": {
+    "https://deno.land/x/ayonli_jsext@0.9.80/esm/array/base.js": "8879a7aed1eeb53f23d25b7fcbe551008a5a0a9774144f5135d81aa52766cbc1",
+    "https://deno.land/x/ayonli_jsext@0.9.80/esm/bytes.js": "634bbe1fdaf93cd6c7da8160f3ea7e74c7c6408ee5b0a8325c379494e6104c3b",
+    "https://deno.land/x/ayonli_jsext@0.9.80/esm/encoding.js": "e082064ea8afc8b3e5094fbd95664a5cc1d8cb3253f731e2e6077bef9ae57262",
+    "https://deno.land/x/ayonli_jsext@0.9.80/esm/math.js": "b9d8de692c1d7a08ce21e8a0de43a174fc3f37d5f02dbdb3de657d344c0d7e89",
+    "https://deno.land/x/ayonli_jsext@0.9.80/esm/string.js": "1bbd533cfdd49bd5330c3125ed11323b2c77afa4b6570c2b2657b8f805f47f04",
+    "https://deno.land/x/ayonli_jsext@0.9.80/esm/string/constants.js": "6f9814ad933a200080512fbb446e9ffcf10dd300d3f798a950756e1933e25cf3",
+    "https://deno.land/x/ayonli_jsext@0.9.80/esm/string/index.js": "e8c2ce47d2663ac0ed50d9a5626397f00352343d484aa1d41e5edcb7f712dd6e"
   }
 }
